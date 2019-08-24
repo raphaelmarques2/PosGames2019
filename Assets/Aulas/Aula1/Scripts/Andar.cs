@@ -17,7 +17,7 @@ public class Andar : MonoBehaviour
         //float v = Input.GetAxis("Vertical");
 
         Rigidbody2D r = GetComponent<Rigidbody2D>();
-
+        
         Vector2 vel = r.velocity;
         vel.x = h * speed;
         r.velocity = vel;
