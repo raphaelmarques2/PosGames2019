@@ -25,7 +25,7 @@ public class TouchMovement : MonoBehaviour
     
     void Update()
     {
-        Vector2 input = new Vector2();
+        Vector2 input = new Vector2(0, 0);
 
         //converte left|right em -1,0,1
         if (left && !right) input.x = -1;

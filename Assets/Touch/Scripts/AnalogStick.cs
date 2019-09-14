@@ -20,6 +20,8 @@ public class AnalogStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
     public FloatUnityEvent OnVerticalChanged;
     public Vector2UnityEvent OnChanged;
 
+    public Vector2 multiplier = new Vector2(1, 1);
+
     private void OnEnable()
     {
         stick.gameObject.SetActive(false);
@@ -61,7 +63,12 @@ public class AnalogStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
         
         //calcular posição do mouse em relação ao componente atual
         Vector2 localPoint = new Vector2();
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, touchPosition, null, out localPoint);
+        RectTransformUtility
+            .ScreenPointToLocalPointInRectangle(
+                rect, 
+                touchPosition, 
+                null, 
+                out localPoint);
         
         //limitar a posição em relação ao raio
         if (localPoint.magnitude > radius)
@@ -83,9 +90,15 @@ public class AnalogStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
 
     void SetInput(Vector2 input)
     {
-        OnHorizontalChanged.Invoke(input.x);
-        OnVerticalChanged.Invoke(input.y);
+        OnHorizontalChanged.Invoke(input.x * multiplier.x);
+        OnVerticalChanged.Invoke(input.y * multiplier.y);
         OnChanged.Invoke(input);
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
 }

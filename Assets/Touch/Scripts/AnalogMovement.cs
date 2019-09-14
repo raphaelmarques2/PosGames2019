@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Velocity2D))]
 public class AnalogMovement : MonoBehaviour
 {
+    
     public Vector2 input { get; set; }
 
     public float speed = 5;
@@ -20,5 +21,6 @@ public class AnalogMovement : MonoBehaviour
     void Update()
     {
         vel.velocity = input * speed;
+        //print(input);
     }
 }
